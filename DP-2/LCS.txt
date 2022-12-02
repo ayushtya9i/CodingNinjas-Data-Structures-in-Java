@@ -1,3 +1,5 @@
+MEMOIZATION APPROACH
+
 public class Solution {
 
 	public static int lcs(String s, String t) {
@@ -47,4 +49,29 @@ public class Solution {
         return dp[i][j];
     }
 
+}
+
+DP APPROACH:
+class Solution {
+    public int lcs(String text1, String text2) {
+        int m =text1.length();
+        int n =text2.length();
+        int[][] storage = new int[m+1][n+1];
+        for(int i=0;i<m+1;i++){
+            storage[i][0]=0;
+        }
+        for(int j=0;j<n+1;j++){
+            storage[0][j]=0;
+        }
+        for(int i=1;i<m+1;i++){
+            for(int j=1;j<n+1;j++){
+                if(text1.charAt(i-1)==text2.charAt(j-1))
+                    storage[i][j]=1+storage[i-1][j-1];
+                    else{
+                        storage[i][j]=Math.max(storage[i][j-1],storage[i-1][j]); 
+                    }
+            }
+        }
+        return storage[m][n];
+    }
 }
